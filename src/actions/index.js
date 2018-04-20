@@ -1,12 +1,12 @@
 //"axios" - makes requests to the Redux Blog API (created by SG); "redux-promise" - handles asynchronous elements of request
-import axios from 'axois';
+import axios from 'axios';
 
 export const FETCH_POSTS = 'fetch_posts';
 
 //Base URL, we change the end depending on if its a GET, POST or DELETE
 const ROOT_URL = 'http://reduxblog.herokuapp.com/api';
 //Key that we use to access the API
-const API_KEY = '?key=PAPERCLIP1234';
+const API_KEY = '?key=GOLDEN1234';
 
 
 export function fetchPosts(){
