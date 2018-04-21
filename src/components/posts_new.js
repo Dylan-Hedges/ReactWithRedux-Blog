@@ -3,13 +3,38 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 class PostsNew extends Component {
-    //<Field> - input that will be visible to the users; name="title" - a property what piece of state this field will produce; componment={} - a prop
+    //(field) - an object that contains event handlers, tells the <Field> to display the <input>, we wire up to the JSX we are returning; {...field.input} - an object that contains event handlers and props (e.g onChange={field.input.onChange}), wires the event handlers etc. to the <input> tag under its props
+    renderField(field){
+        return(
+            <div className="form-group">
+            <label>{field.label}</label>
+                <input
+                    className="form-control"
+                    type="text"
+                    {...field.input}
+                />
+            </div>
+        );
+    }
+    
+    //<Field> - keeps track of data, knows how to interact with Redx-Form (action creators, event handlers etc.) but doesnt know how to display itself on screen; name="title" - a property what piece of state this field will produce; componment={} - shows the field on the screen, interacts directly with the user, a function that returns JSX; this.renderTitleField - we dont include () as the <Field> will call the function at some point in the future (using "()" will call it straight away)
     render() {
         return(
             <form>
                 <Field
+                    label="Title"
                     name="title"
-                    componment={}
+                    component={this.renderField}
+                />
+                <Field
+                    label="Categories"
+                    name="categories"
+                    component={this.renderField}
+                />
+                <Field
+                    label="Post Content"
+                    name="content"
+                    component={this.renderField}
                 />
             </form>
         );
