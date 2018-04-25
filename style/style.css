@@ -1,0 +1,4 @@
+/*This styles the <Link> tag, when rendered to the DOM it will be an <a> tag*/
+form a {
+    margin-left: 5px;
+}
