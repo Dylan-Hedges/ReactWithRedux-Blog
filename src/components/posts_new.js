@@ -4,17 +4,21 @@ import { Field, reduxForm } from 'redux-form';
 
 class PostsNew extends Component {
     //(field) - an object that contains event handlers, tells the <Field> to display the <input>, we wire up to the JSX we are returning; {...field.input} - an object that contains event handlers and props (e.g onChange={field.input.onChange}), wires the event handlers etc. to the <input> tag under its props; "{field.meta.error}" - displays errors to users; ? - a turnary expression, everything before the "?" is evaluated, if it returns a TRUE value, then it resolves with whatever is between the "?" and the ":", if it is a FALSE value, then it resolves with whatever is after the ":"
-    //{field.meta.touched ? field.meta.error: ''} - if the user clicked in the field -> clicked out & has not met the validation requirements, then show the error message, otherwise just show an empty string; "meta.touched" - tracked internally by Redux-Form, user has focused on/clicked on this input then focused out/clicked out
     renderField(field){
+        //"field.meta.touched && field.meta.error" - ternary expression, if the user has touched the field AND there is an error, ? 'has-danger' : - then apply the 'has-danger' class (red), : '' - else apply no class
+        const className = `form-group ${field.meta.touched && field.meta.error ? 'has-danger' : ''}`;
+        //{field.meta.touched ? field.meta.error: ''} - ternary expression, the error message, if the user clicked in the field -> clicked out & has not met the validation requirements, then show the error message, otherwise just show an empty string; "meta.touched" - tracked internally by Redux-Form, user has focused on/clicked on this input then focused out/clicked out
         return(
-            <div className="form-group">
+            <div className={className}>
             <label>{field.label}</label>
                 <input
                     className="form-control"
                     type="text"
                     {...field.input}
                 />
-                {field.meta.touched ? field.meta.error: ''}
+                <div className="text-help">
+                    {field.meta.touched ? field.meta.error: ''}
+                </div>
             </div>
         );
     }
