@@ -26,8 +26,13 @@ class PostsNew extends Component {
         );
     }
     
+    //When the user clicks the submit button
     onSubmit(values) {
-        this.props.createPost(values);
+        //Sends the values of the form + a callback function to the "createPost" action creator (actions -> index.js)
+        this.props.createPost(values, () => {
+            //Sends the user back to the posts page
+            this.props.history.push('/');
+        });
     }
     
     //<Field> - keeps track of data, knows how to interact with Redx-Form (action creators, event handlers etc.) but doesnt know how to display itself on screen; name="title" - a property what piece of state this field will produce; componment={} - shows the field on the screen, interacts directly with the user, a function that returns JSX; this.renderTitleField - we dont include () as the <Field> will call the function at some point in the future (using "()" will call it straight away)

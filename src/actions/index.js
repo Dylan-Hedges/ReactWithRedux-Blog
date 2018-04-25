@@ -22,9 +22,10 @@ export function fetchPosts(){
 }
 
 //Action creator - Sends a new post to the API
-export function createPost(values){
-    //Performs a POST request using Axios, constructs a URL using the base URL + "/posts" + the API Key and sends then sends the value of the form to this address
-    const request = axios.post(`${ROOT_URL}/posts${API_KEY}`, values);
+export function createPost(values, callback){
+    //Performs a POST request using Axios, constructs a URL using the base URL + "/posts" + the API Key and sends then sends a POST request containing the form values typed by the user; ".then(() => callback()" - once the promise has resolved, execute the callback function (passed in from post_new.js) which sends the user back to the homepage (this way it wont redirect the user until the post has been created)
+    const request = axios.post(`${ROOT_URL}/posts${API_KEY}`, values)
+        .then(() => callback());
     return {
         type: CREATE_POST,
         payload: request
