@@ -10,16 +10,18 @@ import promise from 'redux-promise';
 import reducers from './reducers';
 import PostsIndex from './components/posts_index';
 import PostsNew from './components/posts_new';
+import PostsShow from './components/posts_show';
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
-//<BrowserRouter> - paths (using then Route component) go inside; <Route path="" component={}/> - if a user goes to X route/URL, display X component; <Switch> - matches looks at URL and displays only that component, React is lazy at matching e.g if you search for "/posts" it will also display all components with "/", most specific routes go at the top
+//<BrowserRouter> - paths (using then Route component) go inside; <Route path="" component={}/> - if a user goes to X route/URL, display X component; <Switch> - matches looks at URL and displays only that component, React is lazy at matching e.g if you search for "/posts" it will also display all components with "/", most specific routes go at the top; "/posts/:id" - the reason why this is not first is because ":id" is a wildcard, if this was first and we went to "/new" it would think it was a posts id rather than being the route for the new post form
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <BrowserRouter>
       <div>
         <Switch>
           <Route path="/posts/new" component={PostsNew} />
+          <Route path="/posts/:id" component={PostsShow} />
           <Route path="/" component={PostsIndex} />
         </Switch>
       </div>
